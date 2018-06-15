@@ -1,10 +1,11 @@
 const WebsocketServer = require("websocket").server;
-const http = require("https");
+const http = require("http");
 const fs = require("fs");
+const config = require("../config");
 
 var cfg = {
-    ssl_key: "../ssl/ssl.key",
-    ssl_cert: "../ssl/ssl.crt"
+    ssl_key: config.ssl_key,
+    ssl_cert: config.ssl_cert
 };
 
 
@@ -34,15 +35,15 @@ websocket_server.run = function(){
     */
 
 
-    var server = http.createServer(cfg,function(request, response) {
+    var server = http.createServer(function(request, response) {
         console.log("[*] " + (new Date()) + " Received request for " + request.url);
         response.writeHead(404);
         response.end();
     });
 
 
-    server.listen(8080 , function(){
-        console.log("[*] " + (new Date()) + " Server is listening on port 8080");
+    server.listen(8081 , function(){
+        console.log("[*] " + (new Date()) + " Server is listening on port 8081");
     });
 
     /*

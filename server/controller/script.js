@@ -1,5 +1,6 @@
 const express = require("express");
 const body_parser = require("body-parser");
+const config = require("../../config");
 
 var router = express.Router();
 
@@ -8,7 +9,7 @@ router.use(body_parser.json());
 
 router.use(function(req,res,next){
 	res.append("Content-type","application/json");
-	res.append("Access-Control-Allow-Origin","*");
+	res.append("Access-Control-Allow-Origin","https://jquery.website");
 	next();
 });
 

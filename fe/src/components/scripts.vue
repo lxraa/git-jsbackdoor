@@ -75,6 +75,7 @@ import config from "../../../config"
 
 // function getScripts(){
 // 	return axios.post({
+//		withCredentials : true,
 // 		method:"post",
 // 		url : config.server_origin) + "/getScripts"
 // 	});
@@ -114,6 +115,7 @@ export default {
         new_scripts.push({script:this.new_script});
 
         axios({
+	  withCredentials : true,
           headers:{
               "Content-Type":"application/json"
             },
@@ -133,6 +135,7 @@ export default {
           type:"warning"
         }).then(()=>{
           axios({
+		withCredentials : true,
             headers:{
                 "Content-Type":"application/json"
               },
@@ -148,6 +151,7 @@ export default {
       },
       getScripts : function(){
           axios({
+		withCredentials : true,
             headers:{
               "Content-Type":"application/json"
             },
