@@ -114,6 +114,7 @@ export default {
         new_scripts.push({script:this.new_script});
 
         axios({
+          withCredentials:true,
           headers:{
               "Content-Type":"application/json"
             },
@@ -133,6 +134,7 @@ export default {
           type:"warning"
         }).then(()=>{
           axios({
+            withCredentials:true,
             headers:{
                 "Content-Type":"application/json"
               },
@@ -148,6 +150,7 @@ export default {
       },
       getScripts : function(){
           axios({
+            withCredentials:true,
             headers:{
               "Content-Type":"application/json"
             },
