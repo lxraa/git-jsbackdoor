@@ -67,7 +67,6 @@ function getTime(time){
 					table_data: (function(){
 						var table_data = []
 						axios({
-							withCredentials : true,
 							method : "get",
 							url : config.server_origin + "/session/getSessions",
 						}).then(function(res){
