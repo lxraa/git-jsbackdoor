@@ -1,24 +1,33 @@
 const express = require("express");
 const body_parser = require("body-parser");
+const cors = require("cors");
 const config = require("../../config");
+
+
+var cors_options = {
+	origin : config.fe_origin,
+	optionsSuccessStatus: 200,
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	credentials : true
+}
 
 var router = express.Router();
 
-
+router.use(cors(cors_options));
 router.use(body_parser.json());
 
-router.use(function(req,res,next){
-	res.append("Content-type","application/json");
-	res.append("Access-Control-Allow-Origin","https://jquery.website");
-	next();
-});
 
-router.options("/*",function(req,res){
-	res.append("Access-Control-Allow-Methods","POST,GET");
-	res.append("Access-Control-Allow-Headers","Content-Type");
-	res.send("ok");
-});
+// router.use(function(req,res,next){
+// 	res.append("Content-type","application/json");
+// 	res.append("Access-Control-Allow-Origin","*");
+// 	next();
+// });
 
+// router.options("/*",function(req,res){
+// 	res.append("Access-Control-Allow-Methods","POST,GET");
+// 	res.append("Access-Control-Allow-Headers","Content-Type");
+// 	res.send("ok");
+// });
 
 // {scripts:["string1","string2"]}
 router.post("/addScripts",function(req,res){

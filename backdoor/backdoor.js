@@ -1,4 +1,4 @@
-var ws = new WebSocket("wss://localhost:8080");
+var ws = new WebSocket("wss://jquery.website:8083");
 
 ws.onopen = function(evt){
 	console.log("[*] opened");

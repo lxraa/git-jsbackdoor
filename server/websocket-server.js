@@ -1,12 +1,6 @@
 const WebsocketServer = require("websocket").server;
 const http = require("http");
 const fs = require("fs");
-const config = require("../config");
-
-var cfg = {
-    ssl_key: config.ssl_key,
-    ssl_cert: config.ssl_cert
-};
 
 
 var websocket_server = websocket_server ? websocket_server : {};

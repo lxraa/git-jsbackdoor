@@ -1,12 +1,21 @@
 const express = require("express");
 const body_parser = require("body-parser");
+const cors = require("cors");
+
+const config = require("../../config");
+
+
+var cors_options = {
+	origin : config.fe_origin,
+	optionsSuccessStatus: 200,
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	credentials : true
+}
 
 var router = express.Router();
 
-router.use(function(req,res,next){
-	res.append("Access-Control-Allow-Origin","https://jquery.website");
-	next();
-});
+
+router.use(cors(cors_options));
 
 // {cmd:"run",data:"alert(1)"}
 
