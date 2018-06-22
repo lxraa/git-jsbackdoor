@@ -11,7 +11,7 @@ ws.onopen = function(evt){
 
 ws.onmessage = function(evt){
 	bk.handler(evt.data);
-	console.log("[*] recv"+evt.data);
+	console.log("[*] recv data");
 }
 
 

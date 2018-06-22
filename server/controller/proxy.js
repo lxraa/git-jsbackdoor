@@ -4,11 +4,6 @@ const utils = require("../lib/utils");
 
 var router = express.Router();
 
-router.use(function(req,res,next){
-	res.append("Access-Control-Allow-Origin","*");
-	next();
-});
-
 
 router.use("/proxy",function(req, res, next){
 	var concat = require('concat-stream');

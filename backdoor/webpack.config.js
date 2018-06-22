@@ -1,4 +1,5 @@
 const path = require("path");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
 	entry : './backdoor.js',
@@ -6,7 +7,7 @@ module.exports = {
 		path:path.resolve(__dirname,"dist"),
 		filename : "release.js"
 	},
-	mode : "development",
+	mode : "production",
 	module : {
 		rules:[
 		{
@@ -22,5 +23,16 @@ module.exports = {
             loader: 'vue'
         }
         ]
-	}
+	},
+	plugins : [
+		new UglifyJsPlugin({
+			uglifyOptions: {
+				compress : {
+				warnings: false,
+				drop_debugger: true,
+				drop_console: true
+			}
+		}	
+		})
+	]
 }
